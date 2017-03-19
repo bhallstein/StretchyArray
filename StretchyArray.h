@@ -1,9 +1,9 @@
 //
 // StretchyArray.h
-// 
+//
 // - A simple vector-like container.
 // - Members must be trivially copyable value types.
-// 
+//
 
 #ifndef __StretchyArray_h
 #define __StretchyArray_h
@@ -33,19 +33,19 @@ public:
 	{
 		free(arr);
 	}
-	
+
 	void reset() {
 		n = 0;
 		reallocateTo(1);
 	}
-	
+
 	void push(const T &t) {
 		if (n == size) {
 			reallocateTo(size*2);
 		}
 		arr[n++] = t;
 	}
-	
+
 	T pop() {
 		const T t = arr[--n];
 		if (n <= size * SA_CONTRACTION_THRESHOLD) {
@@ -53,30 +53,37 @@ public:
 		}
 		return t;
 	}
-	
+
 	T_SIZE get_capacity() const {
 		return size;
 	}
-	
+
 	T_SIZE get_n() const {
 		return n;
 	}
 
-	T *arr;
-	
+	T operator[](const T_SIZE i) const {
+		return arr[i];
+	}
+
+	T* unsafe_ptr() const {
+		return arr;
+	}
+
 private:
+	T *arr;
 	T_SIZE size;
 	T_SIZE n;
 	T default_val;
-	
+
 	StretchyArray(const StretchyArray &) { }
 	StretchyArray& operator= (const StretchyArray &) { }
-	
+
 	void reallocateTo(T_SIZE new_size) {
 		arr = (T*) realloc(arr, new_size * sizeof(T));
 		size = new_size;
 	}
-	
+
 };
 
 
