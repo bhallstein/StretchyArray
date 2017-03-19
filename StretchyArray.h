@@ -12,6 +12,20 @@
 
 #define SA_CONTRACTION_THRESHOLD 0.28
 
+
+// Forward declarations
+// --------------------------------------
+
+template<class T, class T_SIZE>
+class StretchyArray;
+
+template<class T, class T_SIZE>
+T_SIZE StretchyArray_swapRemove(StretchyArray<T, T_SIZE> &a, T_SIZE i);
+
+
+// StretchyArray
+// --------------------------------------
+
 template<class T, class T_SIZE>
 class StretchyArray {
 public:
@@ -69,6 +83,8 @@ public:
 	T* unsafe_ptr() const {
 		return arr;
 	}
+
+	friend T_SIZE StretchyArray_swapRemove<T, T_SIZE>(StretchyArray<T, T_SIZE> &a, T_SIZE i);
 
 private:
 	T *arr;
