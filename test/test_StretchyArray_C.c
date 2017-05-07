@@ -1,5 +1,9 @@
-#include "../StretchyArray_C.h"
+//
+// test_StretchyArray_C.cpp - tests for stretchyarray (TODO: finish)
+//
+
 #include <stdio.h>
+#include "../StretchyArray_C.h"
 
 #define p_assert(x) do {             \
 		printf("%60s", #x);    \

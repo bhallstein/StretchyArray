@@ -1,6 +1,11 @@
-#include "../StretchyArray_swapRemove.h"
+//
+// test_swapRemove.cpp - test for StretchyArray_swapRemove() add-on
+//
+
 #include <cstdio>
 #include <cassert>
+
+#include "../StretchyArray_swapRemove.h"
 
 #define p_assert(x) do {             \
 		printf("%60s", #x);    \
@@ -17,7 +22,7 @@ int main() {
 	p_header("\n");
 	p_header("test_swapRemove.cpp");
 	p_header("--------------------------------\n");
-	
+
 	StretchyArray<float, int> x;
 	x.push(6);
 	x.push(7);

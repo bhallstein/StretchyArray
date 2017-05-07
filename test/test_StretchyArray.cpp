@@ -1,6 +1,12 @@
-#include "../StretchyArray.h"
+//
+// test_StretchyArray.cpp - tests for stretchyarray
+//
+
 #include <cstdio>
 #include <cassert>
+
+#define SA_ENABLE_INITIALIZER_LIST
+#include "../StretchyArray.h"
 
 #define p_assert(x) do {             \
 		printf("%60s", #x);    \
@@ -38,13 +44,13 @@ int main() {
 	p_assert(a.get_capacity() == 2);
 
 	p_header("Initialization with initializer_list");
-	StretchyArray<X, int> b({
+	StretchyArray<X, int> b{
 		{ 1, 2, 3, },
 		{ 2, 4, 6, },
 		{ 3, 6, 9, },
 		{ 4, 8, 12, },
 		{ 5, 10, 15, },
-	});
+	};
 	p_assert(b.get_n() == 5);
 	p_assert(b.get_capacity() == 8);
 
