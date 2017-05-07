@@ -8,10 +8,7 @@
 #ifndef __StretchyArray_h
 #define __StretchyArray_h
 
-#include <cstdlib>
-
 #define SA_CONTRACTION_THRESHOLD 0.28
-
 
 // Forward declarations
 // --------------------------------------
@@ -29,23 +26,23 @@ T_INDEX StretchyArray_swapRemove(StretchyArray<T, T_INDEX> &a, T_INDEX i);
 template<class T, class T_INDEX>
 class StretchyArray {
 public:
-	StretchyArray(T_INDEX initial_size) :
-		size(0),
+	StretchyArray(T_INDEX initial_capacity) :
+		capacity(0),
 		n(0),
-		arr(NULL)
+		arr(0)
 	{
-		reallocateTo(initial_size);
+		reallocateTo(initial_capacity);
 	}
 	StretchyArray() :
-		size(0),
+		capacity(0),
 		n(0),
-		arr(NULL)
+		arr(0)
 	{
 		reallocateTo(1);
 	}
 	~StretchyArray()
 	{
-		free(arr);
+		delete [] arr;
 	}
 
 	void reset() {
@@ -54,22 +51,22 @@ public:
 	}
 
 	void push(const T &t) {
-		if (n == size) {
-			reallocateTo(size*2);
+		if (n == capacity) {
+			reallocateTo(capacity*2);
 		}
 		arr[n++] = t;
 	}
 
 	T pop() {
 		const T t = arr[--n];
-		if (n <= size * SA_CONTRACTION_THRESHOLD) {
-			reallocateTo(size / 2);
+		if (n <= capacity * SA_CONTRACTION_THRESHOLD) {
+			reallocateTo(capacity / 2);
 		}
 		return t;
 	}
 
 	T_INDEX get_capacity() const {
-		return size;
+		return capacity;
 	}
 
 	T_INDEX get_n() const {
@@ -88,18 +85,23 @@ public:
 
 private:
 	T *arr;
-	T_INDEX size;
+	T_INDEX capacity;
 	T_INDEX n;
-	T default_val;
 
 	StretchyArray(const StretchyArray &) { }
 	StretchyArray& operator= (const StretchyArray &) { }
 
-	void reallocateTo(T_INDEX new_size) {
-		arr = (T*) realloc(arr, new_size * sizeof(T));
-		size = new_size;
+	void reallocateTo(T_INDEX new_capacity) {
+		T *arr_new = new T[new_capacity];
+		if (arr) {
+			for (T_INDEX i=0, _n = n; i < n; ++i) {
+				arr_new[i] = arr[i];
+			}
+			delete arr;
+		}
+		arr = arr_new;
+		capacity = new_capacity;
 	}
-
 };
 
 
