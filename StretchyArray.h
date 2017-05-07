@@ -16,20 +16,20 @@
 // Forward declarations
 // --------------------------------------
 
-template<class T, class T_SIZE>
+template<class T, class T_INDEX>
 class StretchyArray;
 
-template<class T, class T_SIZE>
-T_SIZE StretchyArray_swapRemove(StretchyArray<T, T_SIZE> &a, T_SIZE i);
+template<class T, class T_INDEX>
+T_INDEX StretchyArray_swapRemove(StretchyArray<T, T_INDEX> &a, T_INDEX i);
 
 
 // StretchyArray
 // --------------------------------------
 
-template<class T, class T_SIZE>
+template<class T, class T_INDEX>
 class StretchyArray {
 public:
-	StretchyArray(T_SIZE initial_size) :
+	StretchyArray(T_INDEX initial_size) :
 		size(0),
 		n(0),
 		arr(NULL)
@@ -68,15 +68,15 @@ public:
 		return t;
 	}
 
-	T_SIZE get_capacity() const {
+	T_INDEX get_capacity() const {
 		return size;
 	}
 
-	T_SIZE get_n() const {
+	T_INDEX get_n() const {
 		return n;
 	}
 
-	T operator[](const T_SIZE i) const {
+	T operator[](const T_INDEX i) const {
 		return arr[i];
 	}
 
@@ -84,18 +84,18 @@ public:
 		return arr;
 	}
 
-	friend T_SIZE StretchyArray_swapRemove<T, T_SIZE>(StretchyArray<T, T_SIZE> &a, T_SIZE i);
+	friend T_INDEX StretchyArray_swapRemove<T, T_INDEX>(StretchyArray<T, T_INDEX> &a, T_INDEX i);
 
 private:
 	T *arr;
-	T_SIZE size;
-	T_SIZE n;
+	T_INDEX size;
+	T_INDEX n;
 	T default_val;
 
 	StretchyArray(const StretchyArray &) { }
 	StretchyArray& operator= (const StretchyArray &) { }
 
-	void reallocateTo(T_SIZE new_size) {
+	void reallocateTo(T_INDEX new_size) {
 		arr = (T*) realloc(arr, new_size * sizeof(T));
 		size = new_size;
 	}
