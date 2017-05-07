@@ -57,6 +57,17 @@ public:
 		arr[n++] = t;
 	}
 
+	void push_multi(const T *t, T_INDEX count) {
+		T_INDEX new_n = n + count;
+		while (capacity < new_n) {
+			reallocateTo(capacity*2);
+		}
+		for (T_INDEX i=0; i < count; ++i) {
+			arr[n+i] = t[i];
+		}
+		n = new_n;
+	}
+
 	T pop() {
 		const T t = arr[--n];
 		if (n <= capacity * SA_CONTRACTION_THRESHOLD) {
@@ -94,7 +105,7 @@ private:
 	void reallocateTo(T_INDEX new_capacity) {
 		T *arr_new = new T[new_capacity];
 		if (arr) {
-			for (T_INDEX i=0, _n = n; i < n; ++i) {
+			for (T_INDEX i=0, _n = n; i < _n; ++i) {
 				arr_new[i] = arr[i];
 			}
 			delete arr;

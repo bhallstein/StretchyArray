@@ -31,12 +31,12 @@ int main() {
 	p_header("\n");
 	p_header("test_StretchyArray.cpp");
 	p_header("--------------------------------\n");
-	
+
 	p_header("Initialises to requested capacity");
 	StretchyArray<X, int> a(2);
 	p_assert(a.get_n() == 0);
 	p_assert(a.get_capacity() == 2);
-	
+
 	p_header("Values pushed are added");
 	X x0 = { 1, 2, 3};
 	X x1 = { 4, 5, 6};
@@ -48,7 +48,7 @@ int main() {
 	p_assert(a[0] == x0);
 	p_assert(a[1] == x1);
 	p_assert(a[0] != x1);
-	
+
 	p_header("Capacity expands");
 	a.push(x2);
 	p_assert(a.get_n() == 3);
@@ -58,13 +58,39 @@ int main() {
 	a.push(x2);
 	p_assert(a.get_n() == 5);
 	p_assert(a.get_capacity() == 8);
-	
+
+	p_header("Multi-item push");
+	X x_arr_A = { 10, 11, 12 };
+	X x_arr_B = { 20, 21, 22 };
+	X x_arr_1[] = {
+		x_arr_A,
+		x_arr_B,
+	};
+	a.push_multi(x_arr_1, 2);
+	p_assert(a.get_n() == 7);
+	p_assert(a[5] == x_arr_A);
+	p_assert(a[6] == x_arr_B);
+	a.pop();
+	a.pop();
+
+	p_header("Capacity expands properly on multi-item push");
+	X x_arr_2[] = {
+		x_arr_A, x_arr_A, x_arr_A, x_arr_A, x_arr_A, x_arr_A, x_arr_A, x_arr_A,
+		x_arr_A, x_arr_A, x_arr_A, x_arr_A, x_arr_A, x_arr_A, x_arr_A, x_arr_A,
+	};
+	a.push_multi(x_arr_2, 16);
+	p_assert(a.get_n() == 21);
+	p_assert(a.get_capacity() == 32);
+	for (int i=0; i < 16; ++i) {
+		a.pop();
+	}
+
 	p_header("Removal of elements");
 	X x2_test = a.pop();
 	p_assert(x2_test == x2);
 	p_assert(a.get_n() == 4);
 	p_assert(a.get_capacity() == 8);
-	
+
 	p_header("Contraction around ~0.25 usage");
 	a.pop();
 	a.pop();
@@ -72,7 +98,7 @@ int main() {
 	p_assert(a.get_capacity() == 4);
 	X x1_test = a.pop();
 	p_assert(x1_test == x1);
-	
+
 	p_header("Larger-scale expansion");
 	a.pop();
 	for (int i=0; i < 400; ++i) {
@@ -85,7 +111,7 @@ int main() {
 	}
 	p_assert(a.get_n() == 1);
 	p_assert(a.get_capacity() == 2);
-	
+
 	p_header("Reset");
 	for (int i=0; i < 399; ++i) {
 		a.push(x0);
@@ -94,7 +120,6 @@ int main() {
 	a.reset();
 	p_assert(a.get_n() == 0);
 	p_assert(a.get_capacity() == 1);
-	
+
 	return 0;
 }
-
