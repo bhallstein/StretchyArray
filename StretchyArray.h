@@ -10,6 +10,8 @@
 
 #define SA_CONTRACTION_THRESHOLD 0.28
 
+#include <initializer_list>
+
 // Forward declarations
 // --------------------------------------
 
@@ -32,6 +34,14 @@ public:
 		arr(0)
 	{
 		reallocateTo(initial_capacity);
+	}
+	StretchyArray(std::initializer_list<T> l) :
+		capacity(0),
+		n(0),
+		arr(0)
+	{
+		reallocateTo(1);
+		push_multi(l.begin(), l.size());
 	}
 	StretchyArray() :
 		capacity(0),

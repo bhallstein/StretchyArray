@@ -37,6 +37,18 @@ int main() {
 	p_assert(a.get_n() == 0);
 	p_assert(a.get_capacity() == 2);
 
+	p_header("Initialization with initializer_list");
+	StretchyArray<X, int> b({
+		{ 1, 2, 3, },
+		{ 2, 4, 6, },
+		{ 3, 6, 9, },
+		{ 4, 8, 12, },
+		{ 5, 10, 15, },
+	});
+	p_assert(b.get_n() == 5);
+	p_assert(b.get_capacity() == 8);
+
+
 	p_header("Values pushed are added");
 	X x0 = { 1, 2, 3};
 	X x1 = { 4, 5, 6};

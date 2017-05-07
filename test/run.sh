@@ -1,7 +1,7 @@
 set -e
 
 for f in *.cpp; do
-	clang++ $f -o out
+	clang++ $f -std=c++11 -o out
 	./out
 	rm out
 done
