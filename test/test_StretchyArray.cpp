@@ -8,14 +8,14 @@
 #define SA_ENABLE_INITIALIZER_LIST
 #include "../StretchyArray.h"
 
-#define p_assert(x) do {             \
-		printf("%60s", #x);    \
-		assert(x);                   \
-		printf(" - PASS :)\n");      \
+#define p_assert(x) do {       \
+		printf("%60s", #x);      \
+		assert(x);               \
+		printf(" - PASS :)\n");  \
 	} while (false)
 
-#define p_header(s) do {                               \
-		printf("  %s  \n", s);                     \
+#define p_header(s) do {       \
+		printf("  %s  \n", s);   \
 	} while (false)
 
 
