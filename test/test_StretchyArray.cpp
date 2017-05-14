@@ -59,10 +59,12 @@ int main() {
 	X x0 = { 1, 2, 3};
 	X x1 = { 4, 5, 6};
 	X x2 = { 7, 8, 9};
-	a.push(x0);
-	a.push(x1);
+	int ind_1 = a.push(x0);
+	int ind_2 = a.push(x1);
 	p_assert(a.get_n() == 2);
 	p_assert(a.get_capacity() == 2);
+	p_assert(ind_1 == 0);
+	p_assert(ind_2 == 1);
 	p_assert(a[0] == x0);
 	p_assert(a[1] == x1);
 	p_assert(a[0] != x1);

@@ -66,11 +66,14 @@ public:
 		reallocateTo(1);
 	}
 
-	void push(const T &t) {
-		if (n == capacity) {
+	T_INDEX push(const T &t) {
+		T_INDEX _n = n;
+		if (_n == capacity) {
 			reallocateTo(capacity*2);
 		}
-		arr[n++] = t;
+		arr[_n] = t;
+		++n;
+		return _n;
 	}
 
 	void push_multi(const T *t, T_INDEX count) {
