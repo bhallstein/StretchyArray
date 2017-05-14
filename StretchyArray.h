@@ -30,6 +30,8 @@ T_INDEX StretchyArray_swapRemove(StretchyArray<T, T_INDEX> &a, T_INDEX i);
 template<class T, class T_INDEX>
 class StretchyArray {
 public:
+	typedef T value_type;
+
 	StretchyArray(T_INDEX initial_capacity) :
 		capacity(0),
 		n(0),
@@ -84,7 +86,7 @@ public:
 
 	T pop() {
 		const T t = arr[--n];
-		if (n <= capacity * SA_CONTRACTION_THRESHOLD) {
+		if (n <= capacity * SA_CONTRACTION_THRESHOLD && capacity > 1) {
 			reallocateTo(capacity / 2);
 		}
 		return t;
@@ -98,8 +100,14 @@ public:
 		return n;
 	}
 
-	T operator[](const T_INDEX i) const {
+	T& operator[](const T_INDEX i) {
 		return arr[i];
+	}
+	T& first() {
+		return arr[0];
+	}
+	T& last() {
+		return arr[n-1];
 	}
 
 	T* unsafe_ptr() const {
@@ -122,7 +130,7 @@ private:
 			for (T_INDEX i=0, _n = n; i < _n; ++i) {
 				arr_new[i] = arr[i];
 			}
-			delete arr;
+			delete [] arr;
 		}
 		arr = arr_new;
 		capacity = new_capacity;

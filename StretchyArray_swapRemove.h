@@ -4,7 +4,7 @@
 // - An add-on to StretchyArray which swaps the final element with a removed element,
 //   allowing edits to be made while keeping the array tightly packed.
 //
-// - Returns value: the previous index of the previously-final element, in case
+// - Return value: the previous index of the previously-final element, in case
 //   the caller needs to update existing references to that index.
 //
 // - i.e. given array = [ 1, 2, 3, 4, 5 ]
