@@ -8,16 +8,20 @@
 #define SA_ENABLE_INITIALIZER_LIST
 #include "../StretchyArray.h"
 
-#define p_assert(x) do {       \
+#define p_assert(x) do {     \
 		printf("%60s", #x);      \
 		assert(x);               \
 		printf(" - PASS :)\n");  \
 	} while (false)
 
-#define p_header(s) do {       \
-		printf("  %s  \n", s);   \
+#define p_header(s) do {   \
+		printf("  %s\n", s);   \
 	} while (false)
 
+#define p_overall_header() do {   \
+	printf("\n  " __FILE__ "\n");   \
+	p_header("--------------------------------\n"); \
+} while (false)
 
 struct X {
 	int a, b, c;
@@ -34,9 +38,7 @@ void print(struct X x) {
 
 
 int main() {
-	p_header("\n");
-	p_header("test_StretchyArray.cpp");
-	p_header("--------------------------------\n");
+	p_overall_header();
 
 	p_header("Initialises to requested capacity");
 	StretchyArray<X, int> a(2);

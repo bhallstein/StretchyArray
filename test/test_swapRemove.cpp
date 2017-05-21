@@ -7,21 +7,24 @@
 
 #include "../StretchyArray_swapRemove.h"
 
-#define p_assert(x) do {             \
-		printf("%60s", #x);    \
-		assert(x);                   \
-		printf(" - PASS :)\n");      \
+#define p_assert(x) do {     \
+		printf("%60s", #x);      \
+		assert(x);               \
+		printf(" - PASS :)\n");  \
 	} while (false)
 
-#define p_header(s) do {                               \
-		printf("  %s  \n", s);                     \
+#define p_header(s) do {   \
+		printf("  %s\n", s);   \
 	} while (false)
+
+#define p_overall_header() do {   \
+	printf("\n  " __FILE__ "\n");   \
+	p_header("--------------------------------\n"); \
+} while (false)
 
 
 int main() {
-	p_header("\n");
-	p_header("test_swapRemove.cpp");
-	p_header("--------------------------------\n");
+	p_overall_header();
 
 	StretchyArray<float, int> x;
 	x.push(6);
