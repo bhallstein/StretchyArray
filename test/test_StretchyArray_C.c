@@ -2,23 +2,8 @@
 // test_StretchyArray_C.cpp - tests for stretchyarray (TODO: finish)
 //
 
-#include <stdio.h>
+#include "_test.h"
 #include "../StretchyArray_C.h"
-
-#define p_assert(x) do {     \
-		printf("%60s", #x);      \
-		assert(x);               \
-		printf(" - PASS :)\n");  \
-	} while (0)
-
-#define p_header(s) do {   \
-		printf("  %s\n", s);   \
-	} while (0)
-
-#define p_overall_header() do {   \
-	printf("\n  " __FILE__ "\n");   \
-	p_header("--------------------------------\n"); \
-} while (0)
 
 
 struct X {
@@ -30,7 +15,7 @@ void print(struct X x) {
 
 
 int main() {
-	p_overall_header();
+	p_file_header(__FILE__);
 
 	struct StretchyArray_C a = stretchyArray_make(8, sizeof(struct X));
 

@@ -2,26 +2,10 @@
 // test_StretchyArray.cpp - tests for stretchyarray
 //
 
-#include <cstdio>
-#include <cassert>
-
+#include "_test.h"
 #define SA_ENABLE_INITIALIZER_LIST
 #include "../StretchyArray.h"
 
-#define p_assert(x) do {     \
-		printf("%60s", #x);      \
-		assert(x);               \
-		printf(" - PASS :)\n");  \
-	} while (false)
-
-#define p_header(s) do {   \
-		printf("  %s\n", s);   \
-	} while (false)
-
-#define p_overall_header() do {   \
-	printf("\n  " __FILE__ "\n");   \
-	p_header("--------------------------------\n"); \
-} while (false)
 
 struct X {
 	int a, b, c;
@@ -32,13 +16,14 @@ struct X {
 		return !(*this == x);
 	}
 };
+
 void print(struct X x) {
 	printf("a:%d b:%d c:%d\n", x.a, x.b, x.c);
 }
 
 
 int main() {
-	p_overall_header();
+	p_file_header(__FILE__);
 
 	p_header("Initialises to requested capacity");
 	StretchyArray<X, int> a(2);

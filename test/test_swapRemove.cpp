@@ -2,29 +2,12 @@
 // test_swapRemove.cpp - test for StretchyArray_swapRemove() add-on
 //
 
-#include <cstdio>
-#include <cassert>
-
+#include "_test.h"
 #include "../StretchyArray_swapRemove.h"
-
-#define p_assert(x) do {     \
-		printf("%60s", #x);      \
-		assert(x);               \
-		printf(" - PASS :)\n");  \
-	} while (false)
-
-#define p_header(s) do {   \
-		printf("  %s\n", s);   \
-	} while (false)
-
-#define p_overall_header() do {   \
-	printf("\n  " __FILE__ "\n");   \
-	p_header("--------------------------------\n"); \
-} while (false)
 
 
 int main() {
-	p_overall_header();
+	p_file_header(__FILE__);
 
 	StretchyArray<float, int> x;
 	x.push(6);
