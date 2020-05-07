@@ -1,0 +1,15 @@
+Note: don't use this, it's silly.
+
+- Just use a vector and define a remove() helper that does the swapping, and
+  perhaps compacts the vector (e.g.:
+     auto v_new = std::vector<T>(v.begin(), v.end());
+     v_new.swap(v);
+  ) when v.size() < k * v.capacity()
+
+- For safe bulk item removal, consider a helper function:
+    void remove_multiple(indices) {
+      indices_sorted = indices.sort_in_reverse_order();
+      for (auto i : indices_sorted) {
+        remove_helper(v, i);
+      }
+    }
